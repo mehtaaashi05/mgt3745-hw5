@@ -1,83 +1,46 @@
-# Entries: The First Delegated Feature
+# Opt-in Directory
 
-> Replace this title and every *italic prompt* with your own words. Six
-> sections, in this order: What, See It Work, How to Run, Status, Links,
-> AI Use. GitHub renders this page; it can show, not only tell.
+HW5 delegates F-04: a static guide to typical work by line of business, with illustrative summaries to help interns prepare questions before an informal conversation. The HW4 baseline is [mgt3745-hw4](https://github.com/mehtaaashi05/mgt3745-hw4).
 
-## What
+The project helps interns find employees willing to have a short, informal conversation about another team, without turning curiosity into a formal transfer request. It serves the hesitant explorer and proactive outreacher described in [PROJECT.md](context/PROJECT.md) and [FEATURES.md](context/FEATURES.md).
 
-*HW4 repository: [link it here](https://github.com/YOUR-USER/mgt3745-hw4)*
-
-*One paragraph naming the problem, the user, and the feature, with links to
-[PROJECT.md](context/PROJECT.md) and [FEATURES.md](context/FEATURES.md).
-One sentence on where data now lives and why (ADR-002).*
+Directory entries are stored in Cloudflare D1 behind a Worker, so they survive cleared browser data and can be read by another client. The data boundary and alternatives are recorded in [ADR-002](context/ARCHITECTURE.md).
 
 ## See It Work
 
-*A GIF or screenshot in `/docs` showing an entry surviving a cleared cache
-or appearing in a second browser. Evidence and storefront at once.*
-
-![See it work](docs/see-it-work.gif)
+The deployed endpoint is `https://mgt3745-hw4.mgt3745-hw4.workers.dev/entries`.
 
 ```mermaid
 flowchart LR
   A[Page loads] --> B[GET /entries]
   B --> C[render]
-  D[User submits] --> E[POST /entries]
+  D[User submits an entry] --> E[POST /entries]
   E -->|201| B
-  E -->|400| F[showError]
-  B -->|network fails| F
+  E -->|400| F[show field error]
+  B -->|network or server error| F
 ```
 
 ## How to Run
 
-Deployed: *`https://mgt3745-hw4.YOUR-SUBDOMAIN.workers.dev/entries`*
+Install dependencies with `npm install`. For a new database, initialize the schema with `npm run db:schema`.
 
-From a fresh Codespace:
-
-1. Open the repository in a Codespace. The devcontainer installs xdg-utils and runs `npm install`.
-2. `npx wrangler login --device`, then follow [docs/SESSION_B_COMMANDS.md](docs/SESSION_B_COMMANDS.md)
-   to create the database, run the schema, and deploy.
-3. Paste the deployed URL into `app.js` as `API`.
-4. Right-click `index.html`, choose **Open with Live Server**.
-
-Run the code eval: `API=https://mgt3745-hw4.YOUR-SUBDOMAIN.workers.dev npm test`
-
-![npm test passing](docs/npm-test.png)
-
-To run the Worker locally instead: `npm run dev` (port 8787, local D1 emulator).
+Run the Worker locally with `npm run dev` (port 8787). Serve `index.html` on `127.0.0.1:5500` with Live Server. Deploy with `npm run deploy`. Run the deployed API checks with `API=https://mgt3745-hw4.mgt3745-hw4.workers.dev npm test`.
 
 ## Status
 
-| Feature | EARS statement | Verdict |
-|---|---|---|
-| *Save an entry* | *WHEN a valid entry is submitted, THE SYSTEM SHALL store it* | *PASS* |
-| *Reject empty entry* | *IF text is missing, THEN THE SYSTEM SHALL reject with a reason* | *PASS* |
-| *Survive cleared cache* | *THE SYSTEM SHALL return stored entries on any device* | *PASS* |
-| *Network down* | *IF the server is unreachable, THE SYSTEM SHALL tell the user* | *CANNOT TEST YET* |
-| *Two clients, one table* | *...* | *DEFERRED (ADR-002)* |
+| Behavior | Status |
+|---|---|
+| Save and list a directory entry | Implemented |
+| Reject missing or overlong entry text with a reason | Implemented |
+| F-04 line-of-business guide | Selected; awaiting bolt.new output |
+| Keep entries across cleared browser data | Verified against the deployed Worker |
+| Show an error when the Worker is unreachable | Verified in browser DevTools Offline mode |
+| Return a useful page error for a Worker 500 response | Worker 500 verified locally with a temporary bad SQL column |
 
-*Full verification table lives in [FEATURES.md](context/FEATURES.md).*
-
-## Delegation
-
-- [DDR-001](docs/DDR-001.md): *feature, tool, net hours*
-- [DDR-002](docs/DDR-002.md): *the HW4 Copilot delegation, written up*
-- [Comparison note](docs/COMPARISON.md)
-
-## Links
-
-Reading order for a stranger: [PROJECT.md](context/PROJECT.md) →
-[USERS.md](context/USERS.md) → [FEATURES.md](context/FEATURES.md) →
-[ARCHITECTURE.md](context/ARCHITECTURE.md) → [STANDARDS.md](context/STANDARDS.md) →
-[TOOLS.md](context/TOOLS.md) → [STYLE.md](context/STYLE.md) →
-[EVALS.md](context/EVALS.md) → [SKILLS.md](context/SKILLS.md) → [CLAUDE.md](context/CLAUDE.md)
+The detailed EARS verification table is in [FEATURES.md](context/FEATURES.md).
 
 ## AI Use
 
-*Every delegation has a DDR under Delegation above. Hours spent on this assignment: ___.*
+GitHub Copilot assisted with Worker/API wiring and documentation checks. I reviewed the form, validation, parameter-bound SQL, and failure handling, and I remain responsible for the implementation. I could not independently verify Cloudflare's platform-level request logging, specifically whether Worker infrastructure logs retain client IP metadata. I documented that trust-boundary uncertainty in ADR-002 and limited the directory to fictional, non-sensitive information.
 
-*Retired text: Three proto-DDR questions. What did the agent write? What did you check,
-and how? What could you not fully verify, and what did you do about it?
-For the Worker specifically: name the thing you could not fully inspect.
-Hours spent: ___.*
+The F-04 prediction stake was written after class on September 28, 2026, before the bolt.new delegation.

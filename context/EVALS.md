@@ -1,21 +1,19 @@
 # EVALS.md
 
-The verification table from HW3, grown up. Five sections, in this order.
-The first two are written and committed BEFORE any tool sees the spec.
+The stake below was written after class on 2026-09-28 at 20:40 EDT, before the F-04 bolt.new delegation. This timing does not meet the original before-class requirement. Copilot had already read the assignment brief and repository; neither bolt.new nor AI Studio had produced an F-04 build yet.
 
 ## 1. RAT statement
-<!-- One sentence. The assumption that, if false, makes this build pointless,
-     and what would show it is false. -->
-The riskiest assumption in delegating <feature> is that ...
 
-## 2. Prediction Stake (before build, <date and time>)
-<!-- At least one of each. Never edit the prediction text; add resolutions below it. -->
-- **Tight:** At least _ of _ EARS rows will pass on the tool's first output.
-  - Resolved <date>: _ of _.
-- **Loose:** bolt will follow STYLE.md tokens better than AI Studio.
-  - Resolved <date>: ...
-- **Open:** The tool will introduce a dependency I did not ask for. Resolves when I read package.json.
-  - Resolved <date>: ...
+The riskiest assumption in delegating F-04 is that concise descriptions of typical work by line of business help a hesitant intern choose which team to learn about; if they do not help the intern distinguish or choose a team, the feature has no value, which the feature-specific judgment questions will test.
+
+## 2. Prediction Stake (2026-09-28, 20:40 EDT)
+
+- **Tight:** At least 3 of 4 F-04 EARS rows will pass on bolt.new's first integrated output.
+  - Resolution pending the first integrated bolt.new build.
+- **Loose:** bolt.new's first output will follow STYLE.md color and font tokens more consistently than AI Studio's output.
+  - Resolution pending review of both outputs against STYLE.md.
+- **Open:** bolt.new will introduce a dependency or network call not requested in the prompt.
+  - Resolves when I inspect the original zip, package.json, and output code.
 
 ## 3. Success criteria
 | EARS row (feature) | Checked by | Where |

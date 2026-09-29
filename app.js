@@ -1,89 +1,127 @@
 // app.js
-// Behavior and data. Three functions: load, save, render. Same shape as HW3.
-// What changed in HW4 is where load and save go: two lines, plus what
-// happens when they fail. Everything else that changes is a consequence of
-// those two lines, and that is what HW4 asks you to write down.
+// The page talks to the Worker instead of keeping entries in localStorage.
 
-// Paste your deployed Worker URL here after `npx wrangler deploy`.
-const API = "https://mgt3745-hw4.YOUR-SUBDOMAIN.workers.dev";
+const API = "https://mgt3745-hw4.mgt3745-hw4.workers.dev";
 
-// ---- HW3, for the record (superseded by ADR-002) ------------------------
-// function load()      { return JSON.parse(localStorage.getItem("entries") || "[]"); }
-// function save(list)  { localStorage.setItem("entries", JSON.stringify(list)); }
-// -------------------------------------------------------------------------
-
-const form = document.getElementById("entry-form");
-const input = document.getElementById("entry-text");
-const list = document.getElementById("entry-list");
-const status = document.getElementById("status");
+const form = document.getElementById("note-form");
+const input = document.getElementById("note-input");
+const list = document.getElementById("note-list");
+const error = document.getElementById("note-error");
+const status = document.getElementById("save-status");
+const emptyState = document.getElementById("empty-state");
 
 function showError(message) {
-  // The user sees it on the page. Nothing is thrown in the console.
-  status.textContent = message;
-}
-
-function clearError() {
+  error.textContent = message;
   status.textContent = "";
 }
 
-async function load() {
-  const res = await fetch(API + "/entries");
-  if (!res.ok) { showError("could not load entries"); return []; }
-  return res.json();
+function clearMessages() {
+  error.textContent = "";
+  status.textContent = "";
 }
 
-async function save(entry) {
-  const res = await fetch(API + "/entries", {
+async function loadNotes() {
+  const response = await fetch(API + "/entries");
+  if (!response.ok) {
+    throw new Error("could not load entries");
+  }
+  return response.json();
+}
+
+async function saveEntry(candidate) {
+  const response = await fetch(API + "/entries", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify(entry),
+    body: JSON.stringify(candidate),
   });
-  if (!res.ok) {
-    // The Worker's 400 path sends a short reason in the body. Show it.
-    const reason = await res.text();
-    showError("could not save: " + (reason || res.status));
-    return false;
+
+  if (!response.ok) {
+    const reason = await response.text();
+    throw new Error(reason || "could not save entry");
   }
-  return true;
 }
 
-function render(entries) {
-  // Unchanged from HW3. textContent, never innerHTML.
-  // The server does not get to write HTML into your page either.
+async function deleteEntry(id) {
+  const response = await fetch(API + "/entries/" + id, { method: "DELETE" });
+  if (!response.ok) {
+    const reason = await response.text();
+    throw new Error(reason || "could not remove entry");
+  }
+}
+
+function renderEntries(notes) {
   list.replaceChildren();
-  for (const entry of entries) {
-    const li = document.createElement("li");
+  emptyState.hidden = notes.length > 0;
+
+  for (const note of notes) {
+    const item = document.createElement("li");
     const text = document.createElement("span");
-    text.textContent = entry.text;
+    text.textContent = note.text;
     const when = document.createElement("time");
-    when.textContent = entry.created_at || "";
-    li.append(text, when);
-    list.append(li);
+    when.textContent = note.created_at || "";
+    const request = document.createElement("button");
+    request.type = "button";
+    request.textContent = "Request a conversation";
+    request.setAttribute("aria-label", "Request a conversation with " + note.text);
+    const requestConfirmation = document.createElement("span");
+    requestConfirmation.setAttribute("role", "status");
+    requestConfirmation.hidden = true;
+    request.addEventListener("click", () => {
+      request.disabled = true;
+      requestConfirmation.textContent =
+        "Conversation request sent. This is informational and non-committal.";
+      requestConfirmation.hidden = false;
+    });
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.textContent = "Remove";
+    remove.setAttribute("aria-label", "Remove entry: " + note.text);
+    remove.addEventListener("click", async () => {
+      clearMessages();
+      remove.disabled = true;
+      try {
+        await deleteEntry(note.id);
+        status.textContent = "Entry removed.";
+        await refresh();
+      } catch (err) {
+        remove.disabled = false;
+        showError(err.message || "Could not remove the entry.");
+      }
+    });
+    item.append(text, when, request, requestConfirmation, remove);
+    list.append(item);
   }
 }
 
 async function refresh() {
-  clearError();
   try {
-    render(await load());
+    renderEntries(await loadNotes());
   } catch {
-    // The network itself failed (offline, DNS, CORS). fetch throws here.
-    showError("could not reach the server");
+    showError("Could not reach the server. Try again when it is available.");
   }
 }
 
-form.addEventListener("submit", async (event) => {
+form.addEventListener("submit", async event => {
   event.preventDefault();
-  clearError();
-  const entry = { text: input.value.trim() };
+  clearMessages();
+
+  const candidate = input.value.trim();
+  if (candidate.length < 1 || candidate.length > 200) {
+    showError("Enter a directory entry containing 1–200 characters.");
+    input.setAttribute("aria-invalid", "true");
+    input.focus();
+    return;
+  }
+
+  input.removeAttribute("aria-invalid");
   try {
-    const ok = await save(entry);
-    if (ok) {
-      input.value = "";
-      await refresh();
-    }
-  } catch {
-    showError("could not reach the server");
+    await saveEntry({ text: candidate });
+    input.value = "";
+    status.textContent = "Added to the directory.";
+    await refresh();
+    input.focus();
+  } catch (err) {
+    showError(err.message || "Could not save the entry.");
   }
 });
 

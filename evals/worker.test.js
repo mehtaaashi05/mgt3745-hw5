@@ -37,5 +37,5 @@ test("EARS: WHEN a valid entry is submitted, THE SYSTEM SHALL store it (POST the
   assert.ok(list.some(e => e.text === marker), "posted entry appears in GET");
 });
 
-// TODO (HW5 Part 5): one test for your delegated feature's endpoint or its
-// effect on GET /entries. Name the EARS row in the title.
+// TODO (HW5 Part 5): add a feature test named for its EARS row.
+
