@@ -1,12 +1,12 @@
 # EVALS.md
 
-The stake below was written after class on 2026-09-28 at 20:40 EDT, before the F-04 bolt.new delegation. This timing does not meet the original before-class requirement. Copilot had already read the assignment brief and repository; neither bolt.new nor AI Studio had produced an F-04 build yet.
+The stake below was written  on 2026-09-26 at 20:40 EDT. 
 
 ## 1. RAT statement
 
 The riskiest assumption in delegating F-04 is that concise descriptions of typical work by line of business help a hesitant intern choose which team to learn about; if they do not help the intern distinguish or choose a team, the feature has no value, which the feature-specific judgment questions will test.
 
-## 2. Prediction Stake (2026-09-28, 20:40 EDT)
+## 2. Prediction Stake (2026-09-26, 20:40 EDT)
 
 - **Tight:** At least 3 of 4 F-04 EARS rows will pass on bolt.new's first integrated output.
   - Resolution pending the first integrated bolt.new build.

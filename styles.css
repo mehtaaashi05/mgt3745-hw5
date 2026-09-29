@@ -13,3 +13,34 @@ input[aria-invalid="true"] { border: 2px solid #a02020; }
 #note-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; border-bottom: 1px solid #b8c5d0; }
 #note-list span { flex: 1 1 15rem; overflow-wrap: anywhere; line-height: 1.5; }
 #note-list button { margin: 0; padding: 0.4rem 0.7rem; }
+
+.business-guide {
+	--guide-primary: #051E39;
+	--guide-accent: #B39051;
+	--guide-paper: #FFFFFF;
+	--guide-ink: #1A1A1A;
+	margin: 2rem 0;
+	padding: 1.25rem 0;
+	border-block: 1px solid rgba(5, 30, 57, 0.2);
+	color: var(--guide-ink);
+	background: var(--guide-paper);
+	font-family: Roboto, Arial, sans-serif;
+}
+.business-guide h2, .business-guide h3, .business-guide h4 { color: var(--guide-primary); font-family: "Roboto Slab", Georgia, serif; }
+.guide-kicker { color: var(--guide-accent); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; }
+.guide-options { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+.guide-option { display: flex; min-height: 5.5rem; flex-direction: column; gap: 0.35rem; width: 100%; padding: 1rem; border: 1px solid rgba(5, 30, 57, 0.25); border-radius: 4px; background: var(--guide-paper); color: var(--guide-ink); text-align: left; cursor: pointer; }
+.guide-option:hover { border-color: var(--guide-primary); }
+.guide-option[aria-pressed="true"] { border-color: var(--guide-primary); background: var(--guide-primary); color: var(--guide-paper); }
+.guide-option:focus-visible { outline: 3px solid var(--guide-accent); outline-offset: 3px; }
+.guide-option-name { font-family: "Roboto Slab", Georgia, serif; font-size: 1.05rem; font-weight: 700; }
+.guide-option-tagline { color: inherit; font-size: 0.9rem; opacity: 0.82; }
+.guide-detail { margin-top: 1rem; padding: 1rem; border-left: 4px solid var(--guide-accent); border-radius: 0 4px 4px 0; background: rgba(5, 30, 57, 0.04); }
+.guide-notice { margin: 0.75rem 0; padding: 0.75rem; border-left: 3px solid var(--guide-accent); background: rgba(179, 144, 81, 0.12); font-size: 0.9rem; }
+.guide-summary { font-weight: 500; }
+.guide-detail section { margin-top: 1rem; }
+.guide-detail ul { margin: 0.5rem 0 0; padding-left: 1.25rem; }
+.guide-detail li { margin: 0.35rem 0; line-height: 1.5; }
+@media (min-width: 40rem) {
+	.guide-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
