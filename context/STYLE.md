@@ -4,8 +4,8 @@ color-primary: "#051E39"
 color-accent: "#B39051"
 color-background: "#FFFFFF"
 color-text: "#1A1A1A"
-font-body: "Roboto"
-font-heading: "Roboto Slab"
+font-body: "Arial"
+font-heading: "Arial"
 font-size-min: 14px
 space-unit: 8px
 radius: 4px
@@ -21,7 +21,7 @@ body is what a human reads. One sentence per token. "Looks clean" is fog;
 
 - **color-primary**: Deep blue gives the directory a calm, work-focused tone and maintains contrast on white.
 - **color-accent**: Gold is reserved for focus outlines and calls to action so it signals interaction without taking over the page.
-- **font-body / font-heading**: Roboto keeps short directory entries familiar and readable while Roboto Slab gives the heading a modest editorial distinction.
+- **font-body / font-heading**: Arial is installed on every device, so the page renders the same everywhere with no font download, and heading weight and size carry the hierarchy instead of a second typeface.
 - **space-unit**: An 8px rhythm keeps the form and list aligned without making a small tool feel crowded.
 - **font-size-min**: 14px is the smallest text so supporting instructions remain readable for users scanning quickly.
 
