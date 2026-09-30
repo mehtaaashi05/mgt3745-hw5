@@ -20,7 +20,7 @@ body is what a human reads. One sentence per token. "Looks clean" is fog;
 ## Rationale
 
 - **color-primary**: Deep blue gives the directory a calm, work-focused tone and maintains contrast on white.
-- **color-accent**: Gold is reserved for focus outlines and calls to action so it signals interaction without taking over the page.
+- **color-accent**: Gold marks accent borders on the guide only, never text or focus rings, because it is about 3:1 on white and fails contrast at body size.
 - **font-body / font-heading**: Arial is installed on every device, so the page renders the same everywhere with no font download, and heading weight and size carry the hierarchy instead of a second typeface.
 - **space-unit**: An 8px rhythm keeps the form and list aligned without making a small tool feel crowded.
 - **font-size-min**: 14px is the smallest text so supporting instructions remain readable for users scanning quickly.

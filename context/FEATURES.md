@@ -61,14 +61,6 @@ F-04 adds a small, static guide to typical work by line of business, alongside t
 - The system must retain no conversation content, only the fact that a request was made and its status.
 
 
-
-
-
-
-
-
-
-
 ## Acceptance criteria (EARS)
 
 - WHEN a request is submitted, THE SYSTEM SHALL confirm within 2 seconds.
