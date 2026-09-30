@@ -50,7 +50,11 @@ To run the Worker locally instead: `npm run dev` (port 8787, local D1 emulator).
 
 ## Delegation
 [DDR-001](docs/DDR-001.md): feature, tool, net hours
+
+
 [DDR-002](docs/DDR-002.md): the HW4 Copilot delegation, written up
+
+
 [COMPARISON](docs/COMPARISON.md)]
 
 ## Links
