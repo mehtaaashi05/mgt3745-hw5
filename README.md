@@ -1,3 +1,4 @@
+
 # Opt-in Directory
 
 HW5 delegates F-04: a static guide to typical work by line of business, with illustrative summaries to help interns prepare questions before an informal conversation. The HW4 baseline is [mgt3745-hw4](https://github.com/mehtaaashi05/mgt3745-hw4).
@@ -19,28 +20,47 @@ flowchart LR
   E -->|400| F[show field error]
   B -->|network or server error| F
 ```
+![See it work](docs/Test.png)
+![See it work](docs/f04-guide.png)
+
 
 ## How to Run
 
-Install dependencies with `npm install`. For a new database, initialize the schema with `npm run db:schema`.
+Deployed Worker: `https://mgt3745-hw4.mgt3745-hw4.workers.dev/`
 
-Run the Worker locally with `npm run dev` (port 8787). Serve `index.html` on `127.0.0.1:5500` with Live Server. Deploy with `npm run deploy`. Run the deployed API checks with `API=https://mgt3745-hw4.mgt3745-hw4.workers.dev npm test`.
+From a fresh Codespace:
+
+1. Open the repository in a Codespace. The devcontainer installs xdg-utils and runs `npm install`.
+2. `npx wrangler login --device`, then follow [docs/SESSION_B_COMMANDS.md](docs/SESSION_B_COMMANDS.md)
+   to create the database, run the schema, and deploy.
+3. Paste the deployed URL into `app.js` as `API`.
+4. Right-click `index.html`, choose **Open with Live Server**.
+
+
+
+Run the code eval: API: `https://mgt3745-hw4.mgt3745-hw4.workers.dev/entries
+
+
+To run the Worker locally instead: `npm run dev` (port 8787, local D1 emulator).
 
 ## Status
 
-| Behavior | Status |
-|---|---|
-| Save and list a directory entry | Implemented |
-| Reject missing or overlong entry text with a reason | Implemented |
-| F-04 line-of-business guide | Selected; awaiting bolt.new output |
-| Keep entries across cleared browser data | Verified against the deployed Worker |
-| Show an error when the Worker is unreachable | Verified in browser DevTools Offline mode |
-| Return a useful page error for a Worker 500 response | Worker 500 verified locally with a temporary bad SQL column |
+- **Code:** `npm test` with `API=<worker url>`; 8 tests, 8 passing. Screenshot in README.
+- **Judgment:** docs/JUDGMENT.md, 12 questions, two graders, agreement 92%.
 
-The detailed EARS verification table is in [FEATURES.md](context/FEATURES.md).
+## Delegation
+[DDR-001](docs/DDR-001.md): feature, tool, net hours
+[DDR-002](docs/DDR-002.md): the HW4 Copilot delegation, written up
+[COMPARISON](docs/COMPARISON.md)]
+
+## Links
+
+Reading order for a stranger: [PROJECT.md](context/PROJECT.md) →
+[USERS.md](context/USERS.md) → [FEATURES.md](context/FEATURES.md) →
+[ARCHITECTURE.md](context/ARCHITECTURE.md) → [STANDARDS.md](context/STANDARDS.md) →
+[TOOLS.md](context/TOOLS.md) → [STYLE.md](context/STYLE.md) → [EVALS.md](context/EVALS.md) → [SKILLS.md](context/SKILLS.md)
+[CLAUDE.md](context/CLAUDE.md)
+
 
 ## AI Use
-
-GitHub Copilot assisted with Worker/API wiring and documentation checks. I reviewed the form, validation, parameter-bound SQL, and failure handling, and I remain responsible for the implementation. I could not independently verify Cloudflare's platform-level request logging, specifically whether Worker infrastructure logs retain client IP metadata. I documented that trust-boundary uncertainty in ADR-002 and limited the directory to fictional, non-sensitive information.
-
-The F-04 prediction stake was written after class on September 28, 2026, before the bolt.new delegation.
+Every delegation has a DDR under Delegation above. Hours spent on this assignment: 9.5.

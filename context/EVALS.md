@@ -15,23 +15,28 @@ The riskiest assumption in delegating F-04 is that concise descriptions of typic
 - **Open:** bolt.new will introduce a dependency or network call not requested in the prompt.
   - Resolves when I inspect the original zip, package.json, and output code.
 
+
 ## 3. Success criteria
-| EARS row (feature) | Checked by | Where |
-|---|---|---|
-|WHEN an intern opens the guide, show Business Credit and Treasury Management| test | evals/f04-guide.test.js, "F-04-1 guide data lists Business Credit and Treasury Management" |
-|WHEN an area is selected, show summary and at least one conversation starter|test (data) + judgement (display)|same file, "F-04-2 every are has a summary and at least one starter";  |
-| THE SYSTEM SHALL ... | human | README, See It Work |
+
+EARS row (feature) | Checked by | Where
+--- | --- | ---
+WHEN an intern opens the guide, THE SYSTEM SHALL show Business Credit and Treasury Management. | test | evals/f04-guide.test.js, "F-04-1 guide data lists Business Credit and Treasury Management"
+WHEN an intern selects an area, THE SYSTEM SHALL display its summary of typical work and at least one conversation starter. | test + judgment | evals/f04-guide.test.js, "F-04-2 every F-04 area has a summary and at least one conversation starter"; JUDGMENT Q9
+WHEN an intern selects a different area, THE SYSTEM SHALL show the newly selected area's content while keeping the other area available. | test + human | evals/f04-guide.test.js, "F-04-3 selecting a different area replaces the selected guide content"; JUDGMENT Q10; browser check
+THE SYSTEM SHALL label each summary as illustrative, not an official role description or transfer recommendation. | test + judgment | evals/f04-guide.test.js, "F-04-4 each selected guide is labeled illustrative"; JUDGMENT Q11
 
 ## 4. Error-analysis log
-<!-- Every failure observed, a few words each, counted, sorted by count. -->
-| Failure (a few words) | Count | Source | Category |
-|---|---|---|---|
-| Buttons used its own blue, not color-primary | 2 | bolt, AI Studio | STYLE |
-| | | | |
+
+
+Failure (a few words) | Count | Source | Category
+--- | ---: | --- | ---
+Buttons used its own blue, not color-primary | 2 | bolt, AI Studio | STYLE
+Missing F-04 EARS success-criteria mapping | 1 | human review | EARS
+F-04 switching behavior initially unclear to static test | 1 | code eval | EARS
 
 ## 5. Evals
-- **Code:** `npm test` with `API=<worker url>`; _ tests, _ passing. Screenshot in README.
-- **Judgment:** docs/JUDGMENT.md, _ questions, two graders, agreement _%.
+- **Code:** `npm test` with `API=<worker url>`; 8 tests, 8 passing. Screenshot in README.
+- **Judgment:** docs/JUDGMENT.md, 12 questions, two graders, agreement 92%.
 
 ## Verification table (carried from HW4)
 
