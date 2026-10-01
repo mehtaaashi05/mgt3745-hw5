@@ -27,13 +27,32 @@ test("EARS: IF the entry text is missing, THEN THE SYSTEM SHALL reject it (POST 
 
 test("EARS: WHEN a valid entry is submitted, THE SYSTEM SHALL store it (POST then GET shows it)", async () => {
   const marker = "eval-" + Date.now();
-  const post = await fetch(API + "/entries", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ text: marker }),
-  });
-  assert.equal(post.status, 201);
-  const list = await (await fetch(API + "/entries")).json();
-  assert.ok(list.some(e => e.text === marker), "posted entry appears in GET");
+  let entryId;
+
+  try {
+    const post = await fetch(API + "/entries", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ text: marker }),
+    });
+    assert.equal(post.status, 201);
+    const list = await (await fetch(API + "/entries")).json();
+    const entry = list.find(item => item.text === marker);
+    assert.ok(entry, "posted entry appears in GET");
+    entryId = entry.id;
+  } finally {
+    if (entryId === undefined) {
+      const listResponse = await fetch(API + "/entries");
+      if (listResponse.ok) {
+        const list = await listResponse.json();
+        entryId = list.find(item => item.text === marker)?.id;
+      }
+    }
+
+    if (entryId !== undefined) {
+      const cleanup = await fetch(`${API}/entries/${entryId}`, { method: "DELETE" });
+      assert.equal(cleanup.status, 204, "test entry is removed");
+    }
+  }
 });
 

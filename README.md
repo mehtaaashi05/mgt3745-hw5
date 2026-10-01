@@ -2,11 +2,12 @@
 
 This repository delegates the F-04 feature from [context/FEATURES.md](context/FEATURES.md): a static guide to typical work by line of business that helps interns prepare better questions before an informal conversation.
 
-The HW4 baseline repository remains [mgt3745-hw4](https://github.com/mehtaaashi05/mgt3745-hw4), which I kept as the working reference for this delegated feature.
-
 ## See It Work
 
 The deployed endpoint is `https://mgt3745-hw4.mgt3745-hw4.workers.dev/entries`.
+
+![Test screenshot](docs/Test.png)
+![F-04 guide screenshot](docs/f04-guide.png)
 
 ```mermaid
 flowchart LR
@@ -38,7 +39,7 @@ To run the Worker locally instead: `npm run dev` (port 8787, local D1 emulator).
 
 - **Code:** 8 of 8 tests passing with the deployed Worker URL.
 - **Feature:** 4 of 4 F-04 EARS rows passed in the integrated page.
-- **Judgment:** 11 of 12 questions agreed, or 92% agreement.
+- **Judgment:** 9 of 10 questions agreed, or 90% agreement.
 
 ## Delegation
 
@@ -47,6 +48,8 @@ To run the Worker locally instead: `npm run dev` (port 8787, local D1 emulator).
 - [docs/COMPARISON.md](docs/COMPARISON.md): the bolt.new versus Google AI Studio comparison note.
 
 ## Links
+
+HW4 repository: [mgt3745-hw4](https://github.com/mehtaaashi05/mgt3745-hw4).
 
 Reading order for a stranger: [context/PROJECT.md](context/PROJECT.md) → [context/USERS.md](context/USERS.md) → [context/FEATURES.md](context/FEATURES.md) → [context/ARCHITECTURE.md](context/ARCHITECTURE.md) → [context/STANDARDS.md](context/STANDARDS.md) → [context/TOOLS.md](context/TOOLS.md) → [context/STYLE.md](context/STYLE.md) → [context/EVALS.md](context/EVALS.md) → [context/SKILLS.md](context/SKILLS.md) → [context/CLAUDE.md](context/CLAUDE.md)
 

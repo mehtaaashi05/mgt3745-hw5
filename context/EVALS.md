@@ -28,15 +28,19 @@ THE SYSTEM SHALL label each summary as illustrative, not an official role descri
 
 Failure (a few words) | Count | Source | Category
 --- | ---: | --- | ---
-Default palette and localStorage drift from AI Studio | 2 | AI Studio | STYLE
-Bolt default palette and font choices drifted from tokens | 2 | bolt | STYLE
+Generated output exceeded the requested file scope | 2 | bolt and AI Studio | scope
+Generated output drifted from STYLE.md tokens | 2 | bolt and AI Studio | STYLE
+Generated output added unnecessary dependencies | 2 | bolt and AI Studio | dependency
+Delegated builds failed to preserve Worker/D1 directory integration | 2 | bolt and AI Studio | architecture
+Bolt's Back step made F-04 switching criterion ambiguous | 1 | comparison | EARS
 F-04 switching behavior initially unclear to static test | 1 | code eval | EARS
 Missing F-04 success-criteria mapping in the first pass | 1 | human review | EARS
 Judgment rubric disagreement on change scope | 1 | judgment eval | rubric
+Bolt zip's transitive dependency licenses were not audited | 1 | DDR review | cannot verify
 
 ## 5. Evals
 - **Code:** `npm test` with `API=<worker url>`; 8 tests, 8 passing. Screenshot in README.
-- **Judgment:** docs/JUDGMENT.md, 12 questions, two graders, agreement 92%.
+- **Judgment:** docs/JUDGMENT.md, 10 questions, two graders, agreement 90%.
 
 ## Verification table (carried from HW4)
 

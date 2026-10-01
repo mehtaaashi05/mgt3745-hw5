@@ -22,7 +22,7 @@ body is what a human reads. One sentence per token. "Looks clean" is fog;
 
 - **color-primary**: Deep blue gives the directory a calm, work-focused tone and maintains a 16.78:1 contrast ratio against white, so it passes the 4.5:1 body-text standard for headings and labels.
 - **color-text**: Near-black body text maintains a 17.40:1 contrast ratio against white, which keeps the directory readable for long scanning without forcing a dark theme.
-- **color-error**: The red error color is reserved for failure states only and measures about 5.63:1 against white, which keeps the message legible while remaining distinct from the standard informational blue and black text.
+- **color-error**: The red error color is reserved for failure states only and measures 7.71:1 against white, which keeps the message legible while remaining distinct from the standard informational blue and black text.
 - **color-background**: White creates a minimal, neutral field behind the interface and makes the dark text and blue accents read clearly at a glance.
 - **color-accent**: Gold is restricted to accent borders and the selected-guide border, not body text, because it measures 2.99:1 on white and fails the 4.5:1 threshold for normal text.
 - **font-body / font-heading**: Arial is installed on every device, so the page renders the same everywhere with no font download, and heading weight and size carry the hierarchy instead of a second typeface.
