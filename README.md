@@ -6,7 +6,7 @@ This repository delegates the F-04 feature from [context/FEATURES.md](context/FE
 
 The deployed endpoint is `https://mgt3745-hw4.mgt3745-hw4.workers.dev/entries`.
 
-![Test screenshot](docs/Test.png)
+![NPM Test screenshot](docs/npm_test.png)
 ![F-04 guide screenshot](docs/f04-guide.png)
 
 ```mermaid
@@ -38,7 +38,7 @@ To run the Worker locally instead: `npm run dev` (port 8787, local D1 emulator).
 ## Status
 
 - **Code:** 8 of 8 tests passing with the deployed Worker URL.
-- **Feature:** 4 of 4 F-04 EARS rows passed in the integrated page.
+- **Feature:** 5 of 5 F-04 EARS rows passed, including guide selection with the directory API available and unchanged.
 - **Judgment:** 9 of 10 questions agreed, or 90% agreement.
 
 ## Delegation

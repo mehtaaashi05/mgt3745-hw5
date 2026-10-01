@@ -42,6 +42,7 @@ F-04 adds a small, static guide to typical work by line of business, alongside t
 - WHEN an intern selects an area, THE SYSTEM SHALL display its summary of typical work and at least one conversation starter.
 - WHEN an intern selects a different area, THE SYSTEM SHALL show the newly selected area's content while keeping the other area available.
 - THE SYSTEM SHALL label each summary as illustrative, not an official role description or transfer recommendation.
+- WHEN an intern selects a guide area, THE SYSTEM SHALL keep the directory available through GET /entries without writing directory entries.
 
 ## Behavior
 

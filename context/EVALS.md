@@ -23,6 +23,7 @@ WHEN an intern opens the guide, THE SYSTEM SHALL show Business Credit and Treasu
 WHEN an intern selects an area, THE SYSTEM SHALL display its summary of typical work and at least one conversation starter. | test + judgment | evals/f04-guide.test.js, "F-04-2 every F-04 area has a summary and at least one conversation starter"; JUDGMENT Q9
 WHEN an intern selects a different area, THE SYSTEM SHALL show the newly selected area's content while keeping the other area available. | test + human | evals/f04-guide.test.js, "F-04-3 selecting a different area replaces the selected guide content"; JUDGMENT Q10; browser check
 THE SYSTEM SHALL label each summary as illustrative, not an official role description or transfer recommendation. | test + judgment | evals/f04-guide.test.js, "F-04-4 each selected guide is labeled illustrative"; JUDGMENT Q11
+WHEN an intern selects a guide area, THE SYSTEM SHALL keep the directory available through GET /entries without writing directory entries. | integration test | evals/f04-guide.test.js, "F-04-5"; verifies both guide selections, no POST/DELETE, and GET /entries
 
 ## 4. Error-analysis log
 
