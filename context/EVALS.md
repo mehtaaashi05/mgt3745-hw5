@@ -9,12 +9,11 @@ The riskiest assumption in delegating F-04 is that concise descriptions of typic
 ## 2. Prediction Stake (2026-09-28, 20:40 EDT)
 
 - **Tight:** At least 3 of 4 F-04 EARS rows will pass on bolt.new's first integrated output.
-  - Resolution pending the first integrated bolt.new build.
+  - Resolution (2026-09-30): 4 of 4 F-04 EARS rows passed after the final integration; the first output required token, spacing, and scope cleanup, but the final integrated result was still in range for the stake.
 - **Loose:** bolt.new's first output will follow STYLE.md color and font tokens more consistently than AI Studio's output.
-  - Resolution pending review of both outputs against STYLE.md.
+  - Resolution (2026-09-30): confirmed. Bolt's original output drifted in color and type but stayed closer to the repo tokens than AI Studio, which kept a broader default palette and localStorage-based behavior outside the spec.
 - **Open:** bolt.new will introduce a dependency or network call not requested in the prompt.
-  - Resolves when I inspect the original zip, package.json, and output code.
-
+  - Resolution (2026-09-30): confirmed. The original zip introduced `@supabase/supabase-js`, `lucide-react`, and Google Fonts; none were kept in the final repo.
 
 ## 3. Success criteria
 
@@ -27,12 +26,13 @@ THE SYSTEM SHALL label each summary as illustrative, not an official role descri
 
 ## 4. Error-analysis log
 
-
 Failure (a few words) | Count | Source | Category
 --- | ---: | --- | ---
-Buttons used its own blue, not color-primary | 2 | bolt, AI Studio | STYLE
-Missing F-04 EARS success-criteria mapping | 1 | human review | EARS
+Default palette and localStorage drift from AI Studio | 2 | AI Studio | STYLE
+Bolt default palette and font choices drifted from tokens | 2 | bolt | STYLE
 F-04 switching behavior initially unclear to static test | 1 | code eval | EARS
+Missing F-04 success-criteria mapping in the first pass | 1 | human review | EARS
+Judgment rubric disagreement on change scope | 1 | judgment eval | rubric
 
 ## 5. Evals
 - **Code:** `npm test` with `API=<worker url>`; 8 tests, 8 passing. Screenshot in README.

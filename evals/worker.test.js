@@ -37,5 +37,3 @@ test("EARS: WHEN a valid entry is submitted, THE SYSTEM SHALL store it (POST the
   assert.ok(list.some(e => e.text === marker), "posted entry appears in GET");
 });
 
-// TODO (HW5 Part 5): add a feature test named for its EARS row.
-

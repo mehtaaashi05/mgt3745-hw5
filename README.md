@@ -1,11 +1,8 @@
+# HW5: delegated F-04 line-of-business guide
 
-# Opt-in Directory
+This repository delegates the F-04 feature from [context/FEATURES.md](context/FEATURES.md): a static guide to typical work by line of business that helps interns prepare better questions before an informal conversation.
 
-HW5 delegates F-04: a static guide to typical work by line of business, with illustrative summaries to help interns prepare questions before an informal conversation. The HW4 baseline is [mgt3745-hw4](https://github.com/mehtaaashi05/mgt3745-hw4).
-
-The project helps interns find employees willing to have a short, informal conversation about another team, without turning curiosity into a formal transfer request. It serves the hesitant explorer and proactive outreacher described in [PROJECT.md](context/PROJECT.md) and [FEATURES.md](context/FEATURES.md).
-
-Directory entries are stored in Cloudflare D1 behind a Worker, so they survive cleared browser data and can be read by another client. The data boundary and alternatives are recorded in [ADR-002](context/ARCHITECTURE.md).
+The HW4 baseline repository remains [mgt3745-hw4](https://github.com/mehtaaashi05/mgt3745-hw4), which I kept as the working reference for this delegated feature.
 
 ## See It Work
 
@@ -15,14 +12,10 @@ The deployed endpoint is `https://mgt3745-hw4.mgt3745-hw4.workers.dev/entries`.
 flowchart LR
   A[Page loads] --> B[GET /entries]
   B --> C[render]
-  D[User submits an entry] --> E[POST /entries]
-  E -->|201| B
-  E -->|400| F[show field error]
-  B -->|network or server error| F
+  D[User clicks a business area] --> E[showBusinessArea]
+  E --> F[render summary and starters]
+  G[User adds or removes a directory entry] --> H[POST or DELETE /entries]
 ```
-![See it work](docs/Test.png)
-![See it work](docs/f04-guide.png)
-
 
 ## How to Run
 
@@ -31,40 +24,32 @@ Deployed Worker: `https://mgt3745-hw4.mgt3745-hw4.workers.dev/`
 From a fresh Codespace:
 
 1. Open the repository in a Codespace. The devcontainer installs xdg-utils and runs `npm install`.
-2. `npx wrangler login --device`, then follow [docs/SESSION_B_COMMANDS.md](docs/SESSION_B_COMMANDS.md)
-   to create the database, run the schema, and deploy.
-3. Paste the deployed URL into `app.js` as `API`.
-4. Right-click `index.html`, choose **Open with Live Server**.
+2. Run `npx wrangler login --device`, then follow [docs/SESSION_B_COMMANDS.md](docs/SESSION_B_COMMANDS.md) to create the database, run the schema, and deploy.
+3. Paste the deployed Worker URL into `app.js` as `API`.
+4. Right-click [index.html](index.html) and choose **Open with Live Server**.
 
+Run the code eval with:
 
-
-Run the code eval: API: `https://mgt3745-hw4.mgt3745-hw4.workers.dev/entries
-
+`API=https://mgt3745-hw4.mgt3745-hw4.workers.dev npm test`
 
 To run the Worker locally instead: `npm run dev` (port 8787, local D1 emulator).
 
 ## Status
 
-- **Code:** `npm test` with `API=<worker url>`; 8 tests, 8 passing. Screenshot in README.
-- **Judgment:** docs/JUDGMENT.md, 12 questions, two graders, agreement 92%.
+- **Code:** 8 of 8 tests passing with the deployed Worker URL.
+- **Feature:** 4 of 4 F-04 EARS rows passed in the integrated page.
+- **Judgment:** 11 of 12 questions agreed, or 92% agreement.
 
 ## Delegation
-[DDR-001](docs/DDR-001.md): feature, tool, net hours
 
-
-[DDR-002](docs/DDR-002.md): the HW4 Copilot delegation, written up
-
-
-[COMPARISON](docs/COMPARISON.md)]
+- [docs/DDR-001.md](docs/DDR-001.md): bolt.new build of the F-04 guide, the integration fixes, and the verification findings.
+- [docs/DDR-002.md](docs/DDR-002.md): GitHub Copilot HW4 delegation record for the Worker wiring and verification evidence.
+- [docs/COMPARISON.md](docs/COMPARISON.md): the bolt.new versus Google AI Studio comparison note.
 
 ## Links
 
-Reading order for a stranger: [PROJECT.md](context/PROJECT.md) →
-[USERS.md](context/USERS.md) → [FEATURES.md](context/FEATURES.md) →
-[ARCHITECTURE.md](context/ARCHITECTURE.md) → [STANDARDS.md](context/STANDARDS.md) →
-[TOOLS.md](context/TOOLS.md) → [STYLE.md](context/STYLE.md) → [EVALS.md](context/EVALS.md) → [SKILLS.md](context/SKILLS.md)
-[CLAUDE.md](context/CLAUDE.md)
-
+Reading order for a stranger: [context/PROJECT.md](context/PROJECT.md) → [context/USERS.md](context/USERS.md) → [context/FEATURES.md](context/FEATURES.md) → [context/ARCHITECTURE.md](context/ARCHITECTURE.md) → [context/STANDARDS.md](context/STANDARDS.md) → [context/TOOLS.md](context/TOOLS.md) → [context/STYLE.md](context/STYLE.md) → [context/EVALS.md](context/EVALS.md) → [context/SKILLS.md](context/SKILLS.md) → [context/CLAUDE.md](context/CLAUDE.md)
 
 ## AI Use
-Every delegation has a DDR under Delegation above. Hours spent on this assignment: 9.5.
+
+Every delegation has a record under the Delegation section above. Hours spent on this assignment: 6.5, with the tool-assisted work and the review recorded in the DDRs.
